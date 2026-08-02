@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#f5f7fa">
+    <meta name="description" content="POPEN — A personal storytelling space created by Shanewaz for fun.">
+
+    <title>POPEN — A Personal Storytelling Space</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script>
+        (function () {
+            try {
+                const theme = localStorage.getItem("popen_theme");
+
+                if (theme === "dark") {
+                    document.documentElement.setAttribute("data-theme", "dark");
+                } else {
+                    document.documentElement.setAttribute("data-theme", "light");
+                }
+            } catch (e) {
+                document.documentElement.setAttribute("data-theme", "light");
+            }
+        })();
+    </script>
+</head>
+
+
+<body>
+
+    <!-- =====================================================
+         WELCOME SCREEN
+         ===================================================== -->
+
+    <div id="welcome-screen">
+
+        <div class="welcome-content">
+
+            <div class="welcome-small">
+                Welcome
+            </div>
+
+            <h1 class="welcome-title">
+                to POPEN
+            </h1>
+
+            <p class="welcome-subtitle">
+                POPEN is a website created by Shanewaz for fun.
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+         ===================================================== -->
+
+    <div id="main-content">
+
+
+        <!-- =================================================
+             NAVBAR
+             ================================================= -->
+
+        <nav class="navbar glass-card">
+
+            <div class="nav-container">
+
+
+                <!-- LOGO -->
+
+                <a href="./index.html" class="logo">
+                    POPEN
+                </a>
+
+
+
+                <!-- CONTROLS -->
+
+                <div class="nav-controls">
+
+
+                    <!-- LANGUAGE BUTTON -->
+
+                    <button
+                        id="lang-toggle"
+                        class="control-btn language-btn"
+                        type="button"
+                        aria-label="Switch to Bengali">
+
+                        <span id="language-label">
+                            বাংলা
+                        </span>
+
+                    </button>
+
+
+
+                    <!-- THEME BUTTON -->
+
+                    <button
+                        id="theme-toggle"
+                        class="control-btn"
+                        type="button"
+                        aria-label="Switch to dark mode"
+                        aria-pressed="false">
+
+
+                        <!-- SUN ICON -->
+
+                        <svg
+                            class="sun-icon"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round">
+
+                            <circle cx="12" cy="12" r="5"></circle>
+
+                            <line
+                                x1="12"
+                                y1="1"
+                                x2="12"
+                                y2="3">
+                            </line>
+
+                            <line
+                                x1="12"
+                                y1="21"
+                                x2="12"
+                                y2="23">
+                            </line>
+
+                            <line
+                                x1="4.22"
+                                y1="4.22"
+                                x2="5.64"
+                                y2="5.64">
+                            </line>
+
+                            <line
+                                x1="18.36"
+                                y1="18.36"
+                                x2="19.78"
+                                y2="19.78">
+                            </line>
+
+                            <line
+                                x1="1"
+                                y1="12"
+                                x2="3"
+                                y2="12">
+                            </line>
+
+                            <line
+                                x1="21"
+                                y1="12"
+                                x2="23"
+                                y2="12">
+                            </line>
+
+                        </svg>
+
+
+
+                        <!-- MOON ICON -->
+
+                        <svg
+                            class="moon-icon"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round">
+
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z">
+                            </path>
+
+                        </svg>
+
+                    </button>
+
+
+
+                    <!-- MENU BUTTON -->
+
+                    <button
+                        id="menu-toggle"
+                        class="menu-toggle"
+                        type="button"
+                        aria-label="Open menu"
+                        aria-expanded="false">
+
+                        <span></span>
+                        <span></span>
+                        <span></span>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+
+        <!-- =================================================
+             MENU OVERLAY
+             ================================================= -->
+
+        <div
+            id="menu-overlay"
+            class="menu-overlay">
+        </div>
+
+
+
+        <!-- =================================================
+             NAVIGATION MENU
+             ================================================= -->
+
+        <div
+            id="nav-menu"
+            class="nav-menu"
+            aria-hidden="true">
+
+
+            <!-- MENU HEADER -->
+
+            <div class="menu-header">
+
+                <span
+                    class="menu-title"
+                    data-i18n="menu-title">
+
+                    Menu
+
+                </span>
+
+
+                <button
+                    id="menu-close"
+                    class="menu-close"
+                    type="button"
+                    aria-label="Close menu">
+
+                    ×
+
+                </button>
+
+            </div>
+
+
+
+            <!-- MENU LINKS -->
+
+            <div class="menu-links">
+
+
+                <a
+                    href="./index.html"
+                    class="menu-item active"
+                    data-i18n="nav-home">
+
+                    Home
+
+                </a>
+
+
+                <a
+                    href="#about"
+                    class="menu-item"
+                    data-i18n="nav-about">
+
+                    About
+
+                </a>
+
+
+                <a
+                    href="./stories.html"
+                    class="menu-item"
+                    data-i18n="nav-stories">
+
+                    Stories
+
+                </a>
+
+
+                <a
+                    href="#contact"
+                    class="menu-item"
+                    data-i18n="nav-contact">
+
+                    Contact
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             HERO
+             ================================================= -->
+
+        <header class="hero">
+
+
+            <!-- BACKGROUND ORBS -->
+
+            <div class="hero-background-orb orb-one"></div>
+
+            <div class="hero-background-orb orb-two"></div>
+
+
+
+            <!-- HERO CONTENT -->
+
+            <div class="hero-content">
+
+
+                <!-- LABEL -->
+
+                <div class="hero-label">
+
+                    <span></span>
+
+                    <span data-i18n="hero-label">
+                        A personal storytelling space
+                    </span>
+
+                </div>
+
+
+
+                <!-- TITLE -->
+
+                <h1 data-i18n="hero-title">
+                    Welcome to POPEN
+                </h1>
+
+
+
+                <!-- DESCRIPTION -->
+
+                <p data-i18n="hero-subtitle">
+                    A place for stories, memories and little moments.
+                </p>
+
+
+
+                <!-- BUTTONS -->
+
+                <div class="hero-buttons">
+
+
+                    <a
+                        href="./stories.html"
+                        class="btn primary-btn"
+                        data-i18n="hero-btn">
+
+                        Explore Stories
+
+                    </a>
+
+
+                    <a
+                        href="#about"
+                        class="btn secondary-btn"
+                        data-i18n="hero-about">
+
+                        About POPEN
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- SCROLL INDICATOR -->
+
+            <div class="scroll-indicator">
+
+                <span data-i18n="scroll">
+                    Scroll to explore
+                </span>
+
+                <div class="scroll-arrow">
+                    ↓
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =================================================
+             ABOUT SECTION
+             ================================================= -->
+
+        <section
+            id="about"
+            class="section-padding">
+
+
+            <div class="container">
+
+
+                <!-- SECTION HEADING -->
+
+                <div class="section-heading reveal">
+
+                    <span class="section-number">
+                        01
+                    </span>
+
+                    <h2 data-i18n="about-title">
+                        About POPEN
+                    </h2>
+
+                </div>
+
+
+
+                <!-- ABOUT CARD -->
+
+                <div class="glass-card about-card reveal">
+
+
+                    <div class="about-card-glow"></div>
+
+
+                    <!-- ENGLISH -->
+
+                    <p class="lang-en">
+
+                        POPEN is a personal storytelling space created by Shanewaz for fun.
+                        It is a simple place where stories, memories, thoughts and little
+                        adventures can live without the noise of the modern web.
+
+                    </p>
+
+
+
+                    <!-- BANGLA -->
+
+                    <p class="lang-bn">
+
+                        POPEN হলো শানেওয়াজের তৈরি একটি ব্যক্তিগত গল্প বলার জায়গা।
+                        শখের বসে তৈরি এই ওয়েবসাইটে গল্প, স্মৃতি, চিন্তা এবং ছোট ছোট
+                        অভিজ্ঞতাগুলো সহজভাবে তুলে ধরা হবে।
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             CONTACT SECTION
+             ================================================= -->
+
+        <section
+            id="contact"
+            class="section-padding">
+
+
+            <div class="container">
+
+
+                <!-- SECTION HEADING -->
+
+                <div class="section-heading reveal">
+
+                    <span class="section-number">
+                        02
+                    </span>
+
+                    <h2 data-i18n="contact-title">
+                        Connect
+                    </h2>
+
+                </div>
+
+
+
+                <!-- CONTACT GRID -->
+
+                <div class="contact-grid">
+
+
+                    <!-- FACEBOOK -->
+
+                    <a
+                        href="https://www.facebook.com/profile.php?id=61583880445674"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="contact-card glass-card reveal">
+
+
+                        <div class="contact-icon">
+                            f
+                        </div>
+
+
+                        <div>
+
+                            <h3 data-i18n="contact-fb-normal">
+                                Facebook
+                            </h3>
+
+                          
+
+                        </div>
+
+
+                        <span class="contact-arrow">
+                            ↗
+                        </span>
+
+                    </a>
+
+
+
+                    <!-- VOSS FACEBOOK -->
+
+                    <a
+                        href="https://www.facebook.com/newazsham"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="contact-card glass-card reveal">
+
+
+                        <div class="contact-icon">
+                            f
+                        </div>
+
+
+                        <div>
+
+                            <h3 data-i18n="contact-fb-voss">
+                                VOSS
+                            </h3>
+
+                          
+
+                        </div>
+
+
+                        <span class="contact-arrow">
+                            ↗
+                        </span>
+
+                    </a>
+
+
+
+                    <!-- EMAIL -->
+
+                    <a
+                        href="mailto:mdshanewaz33313@gmail.com"
+                        class="contact-card glass-card reveal">
+
+
+                        <div class="contact-icon">
+                            @
+                        </div>
+
+
+                        <div>
+
+                            <h3 data-i18n="contact-email">
+                                Email
+                            </h3>
+
+                            <p>
+                                mdshanewaz33313@gmail.com
+                            </p>
+
+                        </div>
+
+
+                        <span class="contact-arrow">
+                            ↗
+                        </span>
+
+                    </a>
+
+
+
+                    <!-- OFFICIAL EMAIL -->
+
+                    <div
+                        class="contact-card glass-card disabled reveal">
+
+
+                        <div class="contact-icon">
+                            ✦
+                        </div>
+
+
+                        <div>
+
+                            <h3 data-i18n="contact-official">
+                                Official POPEN Email
+                            </h3>
+
+                            <p data-i18n="contact-soon">
+                                Coming soon
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             FOOTER
+             ================================================= -->
+
+        <footer>
+
+
+            <div class="container footer-content">
+
+
+                <div class="footer-logo">
+                    POPEN
+                </div>
+
+
+                <p>
+
+                    © 2026 POPEN.
+
+
+                    <!-- ENGLISH -->
+
+                    <span class="lang-en">
+                        Created by Shanewaz for fun.
+                    </span>
+
+
+                    <!-- BANGLA -->
+
+                    <span class="lang-bn">
+                        শানেওয়াজের তৈরি, শখের বসে।
+                    </span>
+
+                </p>
+
+            </div>
+
+        </footer>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+         ===================================================== -->
+
+    <script src="./script.js"></script>
+
+</body>
+
+</html>

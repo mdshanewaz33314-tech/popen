@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#f8fafc">
+    <meta name="description" content="Read stories published by POPEN.">
+
+    <title>Stories — POPEN</title>
+<script>
+    (function () {
+        try {
+            const theme = localStorage.getItem("popen_theme");
+            if (theme === "dark") {
+                document.documentElement.setAttribute("data-theme", "dark");
+            } else {
+                document.documentElement.setAttribute("data-theme", "light");
+            }
+        } catch (e) {
+            document.documentElement.setAttribute("data-theme", "light");
+        }
+    })();
+</script>
+
+ <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar glass-card">
+        <div class="nav-container">
+
+            <a href="index.html" class="logo">POPEN</a>
+
+            <div class="nav-links" id="nav-links">
+                <a href="index.html"
+                   class="nav-item"
+                   data-i18n="nav-home">
+                    Home
+                </a>
+
+                <a href="stories.html"
+                   class="nav-item active"
+                   data-i18n="nav-stories">
+                    Stories
+                </a>
+            </div>
+
+            <div class="nav-controls">
+
+                <!-- Language -->
+                <button
+                    id="lang-toggle"
+                    class="control-btn"
+                    type="button"
+                    aria-label="Toggle Language">
+
+                    <span class="lang-en">বাংলা</span>
+                    <span class="lang-bn">EN</span>
+
+                </button>
+
+                <!-- Theme -->
+                <button
+                    id="theme-toggle"
+                    class="control-btn"
+                    type="button"
+                    aria-label="Toggle Theme">
+
+                    <svg
+                        class="sun-icon"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round">
+
+                        <circle cx="12" cy="12" r="5"></circle>
+
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.79" y2="19.79"></line>
+
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.79" y2="4.22"></line>
+                    </svg>
+
+                    <svg
+                        class="moon-icon"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round">
+
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3
+                                 A7 7 0 0 0 21 12.79z">
+                        </path>
+
+                    </svg>
+
+                </button>
+
+                <!-- Mobile menu -->
+                <button
+                    id="hamburger"
+                    class="hamburger"
+                    type="button"
+                    aria-expanded="false"
+                    aria-label="Open Menu">
+
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+
+                </button>
+
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Overlay -->
+    <div
+        class="mobile-overlay"
+        id="mobile-overlay"
+        aria-hidden="true">
+    </div>
+
+    <!-- Stories -->
+    <main class="section-padding stories-page">
+
+        <div class="container">
+
+            <div class="page-heading reveal fade-up">
+
+                <p class="eyebrow lang-en">
+                    POPEN LIBRARY
+                </p>
+
+                <p class="eyebrow lang-bn">
+                    POPEN লাইব্রেরি
+                </p>
+
+                <h1
+                    class="section-title lang-en"
+                    data-i18n="stories-page-title">
+                    All Stories
+                </h1>
+
+                <h1
+                    class="section-title lang-bn">
+                    সব গল্প
+                </h1>
+
+            </div>
+
+            <div
+                id="all-stories-grid"
+                class="stories-grid">
+            </div>
+
+            <!-- Empty state -->
+            <div
+                id="stories-empty"
+                class="empty-state"
+                hidden>
+
+                <p class="lang-en">
+                    No stories have been published yet.
+                </p>
+
+                <p class="lang-bn">
+                    এখনো কোনো গল্প প্রকাশিত হয়নি।
+                </p>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+
+        <div class="container">
+
+            <p>
+                &copy; 2026 POPEN.
+
+                <span class="lang-en">
+                    Created by Shanewaz.
+                </span>
+
+                <span class="lang-bn">
+                    শানেওয়াজের তৈরি।
+                </span>
+            </p>
+
+        </div>
+
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="stories.js"></script>
+
+</body>
+</html>
