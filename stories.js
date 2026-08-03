@@ -21,9 +21,9 @@ const stories = [
 
         date: "August 1, 2026",
 
-        coverImage: "images/story-1-cover.png",
+        coverImage: "story-1-cover.png",
 
-        storyFile: "stories/story-1.html"
+        storyFile: "story-1.html"
     }
 
     // নতুন গল্প এখানে যোগ করবে।
