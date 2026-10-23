@@ -1,222 +1,66 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="light">
+<!doctype html>
+<html lang="en" data-theme="dark">
 <head>
+    <!-- SECTION 01: DOCUMENT METADATA, FONTS & STYLES -->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <meta name="theme-color" content="#f8fafc">
-    <meta name="description" content="Read stories published by POPEN.">
-
-    <title>Stories — POPEN</title>
-<script>
-    (function () {
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="dark">
+    <meta name="theme-color" content="#040b19">
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@500;600;700&family=Playfair+Display:wght@500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@500;600;700&family=Playfair+Display:wght@500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
+    <link rel="stylesheet" href="./style.css">
+    <script>
+      (() => {
         try {
-            const theme = localStorage.getItem("popen_theme");
-            if (theme === "dark") {
-                document.documentElement.setAttribute("data-theme", "dark");
-            } else {
-                document.documentElement.setAttribute("data-theme", "light");
-            }
-        } catch (e) {
-            document.documentElement.setAttribute("data-theme", "light");
-        }
-    })();
-</script>
-
- <link rel="stylesheet" href="style.css">
+          const language = localStorage.getItem('popen_language');
+          if (language === 'bn' || language === 'en') document.documentElement.lang = language;
+        } catch (_) { /* Storage is optional; the default language remains usable. */ }
+      })();
+    </script>
+    <script src="./script.js" defer></script>
+    <meta name="description" content="Explore stories and little adventures published on POpen.">
+    <title>Stories — POpen</title>
 </head>
-
 <body>
-
-    <!-- Navigation -->
-    <nav class="navbar glass-card">
-        <div class="nav-container">
-
-            <a href="index.html" class="logo">POPEN</a>
-
-            <div class="nav-links" id="nav-links">
-                <a href="index.html"
-                   class="nav-item"
-                   data-i18n="nav-home">
-                    Home
-                </a>
-
-                <a href="stories.html"
-                   class="nav-item active"
-                   data-i18n="nav-stories">
-                    Stories
-                </a>
-            </div>
-
-            <div class="nav-controls">
-
-                <!-- Language -->
-                <button
-                    id="lang-toggle"
-                    class="control-btn"
-                    type="button"
-                    aria-label="Toggle Language">
-
-                    <span class="lang-en">বাংলা</span>
-                    <span class="lang-bn">EN</span>
-
-                </button>
-
-                <!-- Theme -->
-                <button
-                    id="theme-toggle"
-                    class="control-btn"
-                    type="button"
-                    aria-label="Toggle Theme">
-
-                    <svg
-                        class="sun-icon"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round">
-
-                        <circle cx="12" cy="12" r="5"></circle>
-
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.79" y2="19.79"></line>
-
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.79" y2="4.22"></line>
-                    </svg>
-
-                    <svg
-                        class="moon-icon"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round">
-
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3
-                                 A7 7 0 0 0 21 12.79z">
-                        </path>
-
-                    </svg>
-
-                </button>
-
-                <!-- Mobile menu -->
-                <button
-                    id="hamburger"
-                    class="hamburger"
-                    type="button"
-                    aria-expanded="false"
-                    aria-label="Open Menu">
-
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-
-                </button>
-
-            </div>
-        </div>
-    </nav>
-
-    <!-- Mobile Overlay -->
-    <div
-        class="mobile-overlay"
-        id="mobile-overlay"
-        aria-hidden="true">
+  <!-- SECTION 02: ACCESSIBILITY -->
+  <a class="skip-link" href="#main-content" data-i18n="skip-link">Skip to content</a>
+  <!-- SECTION 03: SHARED NAVIGATION -->
+  <header class="site-header">
+  <nav class="navbar container" aria-label="Main navigation" data-i18n-aria="main-nav-label">
+    <a href="./index.html#home" class="logo" aria-label="POpen home"><span class="logo-mark" aria-hidden="true">P</span><span>PO<span class="logo-accent">P</span>EN</span></a>
+    <div class="nav-links" id="nav-links">
+      <a href="./index.html#home" class="nav-item" data-i18n="nav-home">Home</a>
+      <a href="./index.html#about" class="nav-item" data-i18n="nav-about">About</a>
+      <a href="./stories.html" class="nav-item active" aria-current="page" data-i18n="nav-stories">Stories</a>
+      <a href="./index.html#contact" class="nav-item" data-i18n="nav-contact">Contact</a>
     </div>
-
-    <!-- Stories -->
-    <main class="section-padding stories-page">
-
-        <div class="container">
-
-            <div class="page-heading reveal fade-up">
-
-                <p class="eyebrow lang-en">
-                    POPEN LIBRARY
-                </p>
-
-                <p class="eyebrow lang-bn">
-                    POPEN লাইব্রেরি
-                </p>
-
-                <h1
-                    class="section-title lang-en"
-                    data-i18n="stories-page-title">
-                    All Stories
-                </h1>
-
-                <h1
-                    class="section-title lang-bn">
-                    সব গল্প
-                </h1>
-
-            </div>
-
-            <div
-                id="all-stories-grid"
-                class="stories-grid">
-            </div>
-
-            <!-- Empty state -->
-            <div
-                id="stories-empty"
-                class="empty-state"
-                hidden>
-
-                <p class="lang-en">
-                    No stories have been published yet.
-                </p>
-
-                <p class="lang-bn">
-                    এখনো কোনো গল্প প্রকাশিত হয়নি।
-                </p>
-
-            </div>
-
-        </div>
-
-    </main>
-
-    <!-- Footer -->
-    <footer>
-
-        <div class="container">
-
-            <p>
-                &copy; 2026 POPEN.
-
-                <span class="lang-en">
-                    Created by Shanewaz.
-                </span>
-
-                <span class="lang-bn">
-                    শানেওয়াজের তৈরি।
-                </span>
-            </p>
-
-        </div>
-
-    </footer>
-
-    <script src="script.js"></script>
-    <script src="stories.js"></script>
-
+    <div class="nav-controls">
+      <button id="lang-toggle" class="control-btn language-btn" type="button" aria-label="Switch to Bengali" title="বাংলা"><span id="language-label">বাংলা</span></button>
+      <button id="menu-toggle" class="hamburger" type="button" aria-controls="nav-links" aria-expanded="false" aria-label="Open menu" data-i18n-aria="open-menu-label"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+</header>
+<div class="mobile-overlay" id="mobile-overlay" aria-hidden="true" hidden></div>
+  <!-- SECTION 04: STORY ARCHIVE -->
+  <main id="main-content" class="stories-page section-padding">
+    <div class="container">
+      <!-- SECTION 04A: ARCHIVE HEADING -->
+     <header class="page-heading reveal"><h1 class="section-title lang-en">All stories<span class="title-period">.</span></h1><h1 class="section-title lang-bn">সব গল্প<span class="title-period">।</span></h1><p class="page-description lang-en">Little moments, kept as stories.</p><p class="page-description lang-bn">ছোট ছোট মুহূর্ত—গল্প হয়ে থেকে যাক।</p></header>
+      <!-- SECTION 04B: STORY CARDS -->
+      <div id="all-stories-grid" class="stories-grid reveal">
+        <a href="./story-1.html" class="story-card glass-card"><div class="story-card-media"><img src="./story-1-cover.jpg" alt="A Day's Tale cover illustration" class="story-card-img" data-cover-fallback loading="lazy" decoding="async"></div><div class="story-card-content">
+          <p class="story-date"><span class="lang-en">August 1, 2026</span><span class="lang-bn">১ আগস্ট, ২০২৬</span></p>
+          <h2 class="lang-en">A Day's Tale</h2><h2 class="lang-bn">এক দিনের কথা</h2><p class="lang-en story-description">A spontaneous post-exam trip turns into an unforgettable adventure filled with metro rides, a swimming pool, and a struggle for 500 Taka change.</p><p class="lang-bn story-description">পরীক্ষা শেষের এক স্বতঃস্ফূর্ত ঘোরাঘুরি কীভাবে মেট্রো ভ্রমণ, সুইমিং পুল আর ৫০০ টাকার ভাঙতি খোঁজার এক অবিস্মরণীয় রোমাঞ্চে পরিণত হলো।</p><span class="read-more lang-en">Read story <span aria-hidden="true">→</span></span><span class="read-more lang-bn">গল্পটি পড়ুন <span aria-hidden="true">→</span></span></div></a>
+      </div>
+      <div id="stories-empty" class="empty-state" hidden><p class="lang-en">No stories have been published yet.</p><p class="lang-bn">এখনো কোনো গল্প প্রকাশিত হয়নি।</p></div>
+    </div>
+  </main>
+  <!-- SECTION 05: SITE FOOTER -->
+  <footer class="site-footer"><div class="container footer-content"><a href="./index.html#home" class="footer-logo">PO<span>P</span>EN</a><p>© <span id="copyright-year">2026</span> POpen. <span class="lang-en">Created by Shanewaz for fun.</span><span class="lang-bn">শানেওয়াজের তৈরি, শখের বসে।</span></p><a href="#main-content" class="footer-top" aria-label="Back to top">↑</a></div></footer>
+  <!-- SECTION 06: STORY LIST RENDERER -->
+  <script src="./stories.js" defer></script>
 </body>
-</html>
+    </html>
