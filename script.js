@@ -3,35 +3,15 @@
 (() => {
   const root = document.documentElement;
 
-  // SECTION 1 — Language dictionaries and shared state
+  // SECTION 1 — Dictionaries and shared state
+  // Visible page copy lives in the HTML as .lang-en / .lang-bn pairs (no flash, works without JS).
+  // This dictionary only holds strings that JavaScript itself creates.
   const dictionary = {
     en: {
-      "skip-link": "Skip to content",
-      "main-nav-label": "Main navigation",
-      "nav-home": "Home",
-      "nav-about": "About",
-      "nav-stories": "Stories",
-      "nav-contact": "Contact",
-      "hero-kicker": "STORIES · MEMORIES · LITTLE ADVENTURES",
-      "hero-title": "Welcome to POpen",
-      "hero-subtitle": "A place for stories, memories and little moments.",
-      "hero-btn": "Explore Stories",
-      "hero-about-btn": "Discover POpen",
-      "stories-kicker": "THE STORY ARCHIVE",
-      "view-all-stories": "View all stories",
-      "about-kicker": "A LITTLE ABOUT THIS PLACE",
-      "about-title": "About POpen",
-      "contact-kicker": "LET'S CONNECT",
-      "contact-title": "Get in touch",
-      "or-connect": "Or connect directly",
-      "name-label": "Name",
       "name-placeholder": "Your name",
-      "email-label": "Your email",
       "email-placeholder": "Your email",
-      "message-label": "Your message",
       "message-placeholder": "Write your message",
-      "send-message": "Send message",
-      "form-config-error": "The contact form is not connected yet. Replace the form ID in index.html with the real alphanumeric Formspree form ID.",
+      "form-config-error": "The contact form is temporarily unavailable. Please try again later.",
       "form-sending": "Sending your message…",
       "form-success": "Thanks — your message has been sent.",
       "form-error": "The message could not be sent. Please try again.",
@@ -40,35 +20,15 @@
       "v-email": "Please enter a valid email address.",
       "v-short": "Please enter at least {n} characters.",
       "open-menu-label": "Open menu",
-      "close-menu-label": "Close menu"
+      "close-menu-label": "Close menu",
+      "switch-label": "বাংলা — Switch to Bengali",
+      "switch-title": "বাংলা"
     },
     bn: {
-      "skip-link": "মূল কনটেন্টে যান",
-      "main-nav-label": "প্রধান নেভিগেশন",
-      "nav-home": "হোম",
-      "nav-about": "সম্পর্কে",
-      "nav-stories": "গল্প",
-      "nav-contact": "যোগাযোগ",
-      "hero-kicker": "গল্প · স্মৃতি · ছোট ছোট অভিযান",
-      "hero-title": "POpen-এ স্বাগতম",
-      "hero-subtitle": "গল্প, স্মৃতি এবং ছোট ছোট মুহূর্তের একটি জায়গা।",
-      "hero-btn": "গল্পগুলো দেখুন",
-      "hero-about-btn": "POpen সম্পর্কে জানুন",
-      "stories-kicker": "গল্পের সংগ্রহ",
-      "view-all-stories": "সব গল্প দেখুন",
-      "about-kicker": "এই জায়গা সম্পর্কে",
-      "about-title": "POpen সম্পর্কে",
-      "contact-kicker": "যোগাযোগ করা যাক",
-      "contact-title": "যোগাযোগ করুন",
-      "or-connect": "অথবা সরাসরি যোগাযোগ করুন",
-      "name-label": "নাম",
       "name-placeholder": "আপনার নাম",
-      "email-label": "আপনার ইমেইল",
       "email-placeholder": "আপনার ইমেইল",
-      "message-label": "আপনার বার্তা",
       "message-placeholder": "আপনার বার্তা লিখুন",
-      "send-message": "বার্তা পাঠান",
-      "form-config-error": "যোগাযোগ ফর্মটি এখনো সংযুক্ত নয়। index.html ফাইলে ফর্ম আইডির জায়গায় Formspree থেকে পাওয়া আসল Form ID বসান।",
+      "form-config-error": "যোগাযোগ ফর্মটি এখন কাজ করছে না। অনুগ্রহ করে একটু পরে আবার চেষ্টা করুন।",
       "form-sending": "বার্তা পাঠানো হচ্ছে…",
       "form-success": "ধন্যবাদ — আপনার বার্তা পাঠানো হয়েছে।",
       "form-error": "বার্তাটি পাঠানো যায়নি। আবার চেষ্টা করুন।",
@@ -77,7 +37,9 @@
       "v-email": "অনুগ্রহ করে একটি সঠিক ইমেইল ঠিকানা দিন।",
       "v-short": "অনুগ্রহ করে অন্তত {n}টি অক্ষর লিখুন।",
       "open-menu-label": "মেনু খুলুন",
-      "close-menu-label": "মেনু বন্ধ করুন"
+      "close-menu-label": "মেনু বন্ধ করুন",
+      "switch-label": "EN — Switch to English",
+      "switch-title": "English"
     }
   };
 
@@ -129,6 +91,7 @@
     status.textContent = t(key);
   }
 
+  // Cover images carry data-alt-en / data-alt-bn.
   function syncCoverAlts(scope = document) {
     scope.querySelectorAll("img[data-alt-en][data-alt-bn]").forEach((img) => {
       const next = language === "bn" ? img.dataset.altBn : img.dataset.altEn;
@@ -136,71 +99,38 @@
     });
   }
 
+  // <title> and <meta name="description"> carry data-en / data-bn.
+  function syncDocumentMeta() {
+    const title = document.querySelector("title");
+    if (title && title.dataset[language]) document.title = title.dataset[language];
+    const description = document.querySelector('meta[name="description"]');
+    if (description && description.dataset[language]) {
+      description.setAttribute("content", description.dataset[language]);
+    }
+  }
+
   function applyLanguage(value) {
     language = value === "bn" ? "bn" : "en";
     root.lang = language;
     root.dataset.language = language;
 
-    document.querySelectorAll("[data-i18n]").forEach((element) => {
-      const key = element.getAttribute("data-i18n");
-      if (!key) return;
-
-      if (key === "hero-title") {
-        // Safer than full innerHTML: only update the two known child spans
-        let welcome = element.querySelector(".hero-welcome-part");
-        let name = element.querySelector(".hero-name-part");
-
-        if (!welcome || !name) {
-          element.textContent = "";
-          welcome = document.createElement("span");
-          welcome.className = "hero-welcome-part";
-          name = document.createElement("span");
-          name.className = "hero-name-part";
-          element.append(welcome, document.createTextNode(" "), name);
-        }
-
-        if (language === "en") {
-          welcome.textContent = "Welcome to";
-          name.textContent = "POpen";
-        } else {
-          welcome.textContent = "POpen-এ";
-          name.textContent = "স্বাগতম";
-        }
-      } else if (dictionary[language][key]) {
-        element.textContent = dictionary[language][key];
-      }
-    });
-
     document.querySelectorAll("[data-i18n-placeholder]").forEach((element) => {
       const key = element.getAttribute("data-i18n-placeholder");
-      if (dictionary[language][key]) {
-        element.setAttribute("placeholder", dictionary[language][key]);
-      }
-    });
-
-    document.querySelectorAll("[data-i18n-aria]").forEach((element) => {
-      const key = element.getAttribute("data-i18n-aria");
-      if (dictionary[language][key]) {
-        element.setAttribute("aria-label", dictionary[language][key]);
-      }
-    });
-
-    document.querySelectorAll("#language-label").forEach((label) => {
-      label.textContent = language === "en" ? "বাংলা" : "EN";
+      if (dictionary[language][key]) element.setAttribute("placeholder", dictionary[language][key]);
     });
 
     document.querySelectorAll("#lang-toggle").forEach((button) => {
-      button.setAttribute(
-        "aria-label",
-        language === "en" ? "Switch to Bengali" : "Switch to English"
-      );
-      button.setAttribute("title", language === "en" ? "বাংলা" : "English");
+      button.setAttribute("aria-label", t("switch-label"));
+      button.setAttribute("title", t("switch-title"));
     });
 
     storageSet("popen_language", language);
     updateMenuLabels();
     renderFormStatus();
     syncCoverAlts(document);
+    syncDocumentMeta();
+    // A visible validation message must not stay in the old language.
+    document.querySelectorAll("#contact-form input, #contact-form textarea").forEach((f) => f.setCustomValidity(""));
   }
 
   function updateMenuLabels() {
@@ -208,9 +138,7 @@
     if (toggle) {
       toggle.setAttribute(
         "aria-label",
-        toggle.getAttribute("aria-expanded") === "true"
-          ? t("close-menu-label")
-          : t("open-menu-label")
+        toggle.getAttribute("aria-expanded") === "true" ? t("close-menu-label") : t("open-menu-label")
       );
     }
   }
@@ -227,15 +155,29 @@
     });
   }
 
-  // SECTION 3 — Mobile menu
+  // SECTION 3 — Mobile menu (focus-trapped while open)
   function setupMobileMenu() {
     const toggle = document.getElementById("menu-toggle");
     const menu = document.getElementById("nav-links");
     const overlay = document.getElementById("mobile-overlay");
     if (!toggle || !menu || !overlay) return;
 
+    const langButton = document.getElementById("lang-toggle");
+    // Everything behind the open panel becomes inert, so Tab cannot reach it.
+    const background = [
+      document.getElementById("main-content"),
+      document.querySelector(".site-footer"),
+      document.querySelector(".site-header .logo")
+    ].filter(Boolean);
+
     let overlayTimer = 0;
-    let focusTimer = 0;
+
+    function setBackgroundInert(on) {
+      background.forEach((element) => {
+        if (on) element.setAttribute("inert", "");
+        else element.removeAttribute("inert");
+      });
+    }
 
     function setMenu(open, returnFocus = false) {
       const isMobile = mobileBreakpoint.matches;
@@ -243,11 +185,12 @@
 
       menu.classList.toggle("active", show);
       clearTimeout(overlayTimer);
-      clearTimeout(focusTimer);
 
       if (show) {
         overlay.hidden = false;
-        requestAnimationFrame(() => overlay.classList.add("active"));
+        // Force a reflow so the opacity transition starts from 0 instead of being skipped.
+        void overlay.offsetWidth;
+        overlay.classList.add("active");
       } else {
         overlay.classList.remove("active");
         overlayTimer = setTimeout(() => {
@@ -256,48 +199,30 @@
       }
 
       toggle.setAttribute("aria-expanded", String(show));
-      toggle.setAttribute(
-        "aria-label",
-        show ? t("close-menu-label") : t("open-menu-label")
-      );
+      toggle.setAttribute("aria-label", show ? t("close-menu-label") : t("open-menu-label"));
+      setBackgroundInert(show);
 
       if (isMobile) {
         menu.setAttribute("aria-hidden", String(!show));
         if (show) menu.removeAttribute("inert");
         else menu.setAttribute("inert", "");
         document.body.classList.toggle("menu-open", show);
+        root.classList.toggle("menu-open", show);
       } else {
         menu.removeAttribute("inert");
         menu.setAttribute("aria-hidden", "false");
         document.body.classList.remove("menu-open");
+        root.classList.remove("menu-open");
       }
 
       if (show) {
         const firstLink = menu.querySelector("a[href]");
-        let attempts = 0;
-
-        const focusFirstLink = () => {
-          if (!firstLink || toggle.getAttribute("aria-expanded") !== "true") return;
-          firstLink.focus({ preventScroll: true });
-          if (document.activeElement !== firstLink && ++attempts < 10) {
-            focusTimer = setTimeout(focusFirstLink, 40);
+        // The panel turns visible immediately (visibility has no delay when showing), so focus on the next frame.
+        requestAnimationFrame(() => {
+          if (firstLink && toggle.getAttribute("aria-expanded") === "true") {
+            firstLink.focus({ preventScroll: true });
           }
-        };
-
-        // Prefer transitionend when available; fall back to timed retries
-        const onTransitionEnd = (event) => {
-          if (event.target !== menu || event.propertyName !== "transform") return;
-          menu.removeEventListener("transitionend", onTransitionEnd);
-          focusFirstLink();
-        };
-
-        if (reduceMotion) {
-          focusTimer = setTimeout(focusFirstLink, 0);
-        } else {
-          menu.addEventListener("transitionend", onTransitionEnd);
-          // Safety net if transitionend never fires
-          focusTimer = setTimeout(focusFirstLink, 520);
-        }
+        });
       } else if (returnFocus) {
         toggle.focus({ preventScroll: true });
       }
@@ -311,13 +236,40 @@
 
     overlay.addEventListener("click", () => setMenu(false, true));
 
+    // Older iOS Safari ignores body{overflow:hidden}; block touch-scrolling of the page behind the open panel.
+    const blockTouchScroll = (event) => {
+      if (toggle.getAttribute("aria-expanded") === "true") event.preventDefault();
+    };
+    overlay.addEventListener("touchmove", blockTouchScroll, { passive: false });
+    menu.addEventListener("touchmove", blockTouchScroll, { passive: false });
+
     menu.querySelectorAll("a[href]").forEach((link) => {
       link.addEventListener("click", () => setMenu(false));
     });
 
     document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") {
+      if (toggle.getAttribute("aria-expanded") !== "true") return;
+
+      if (event.key === "Escape") {
         setMenu(false, true);
+        return;
+      }
+      if (event.key !== "Tab") return;
+
+      const items = [...menu.querySelectorAll("a[href]"), langButton, toggle].filter(Boolean);
+      const first = items[0];
+      const last = items[items.length - 1];
+      const active = document.activeElement;
+
+      if (!items.includes(active)) {
+        event.preventDefault();
+        first.focus();
+      } else if (event.shiftKey && active === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && active === last) {
+        event.preventDefault();
+        first.focus();
       }
     });
 
@@ -329,7 +281,7 @@
     }
   }
 
-  // SECTION 4 — Scroll reveal and active-section highlight
+  // SECTION 4 — Scroll reveal, active-section highlight, hero motion
   function refreshReveal(scope = document) {
     const elements = scope.querySelectorAll(".reveal:not([data-reveal-ready])");
     if (!elements.length) return;
@@ -352,11 +304,7 @@
             }
           });
         },
-        {
-          root: null,
-          threshold: 0,
-          rootMargin: "0px 0px -20px 0px"
-        }
+        { root: null, threshold: 0, rootMargin: "0px 0px -20px 0px" }
       );
     }
 
@@ -399,8 +347,7 @@
         }
       });
 
-      const atBottom =
-        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+      const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
       if (atBottom) current = last;
       if (!current) current = entries[0];
 
@@ -423,61 +370,80 @@
     update();
   }
 
-  // SECTION 5 — Image fallback and story cover handling
+  // Pauses the infinite orb animation while the hero is off-screen.
+  function setupHeroMotion() {
+    const hero = document.querySelector(".hero");
+    if (!hero || !("IntersectionObserver" in window)) return;
+    new IntersectionObserver((entries) => {
+      entries.forEach((entry) => hero.classList.toggle("is-offscreen", !entry.isIntersecting));
+    }).observe(hero);
+  }
+
+  // SECTION 5 — Story cover images: retry, stall recovery, placeholder
+  // The placeholder art lives in CSS (--cover-placeholder), so a cover that is slow or has failed
+  // never leaves a blank box. This code keeps trying to get the real image.
+  const COVER_MAX_RETRIES = 3;
+  const COVER_STALL_MS = 20000;
+
   function setupCoverFallbacks(scope = document) {
-    // Generic fallback — no story-specific title so it works for every story
-    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
-<title id="title">POpen story cover</title>
-<desc id="desc">An abstract illustration in navy, blue, and antique gold.</desc>
-<defs>
-  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-    <stop stop-color="#07142a"/><stop offset="1" stop-color="#16385e"/>
-  </linearGradient>
-  <radialGradient id="sun">
-    <stop stop-color="#f5d7a0" stop-opacity=".95"/>
-    <stop offset="1" stop-color="#dfaa63" stop-opacity="0"/>
-  </radialGradient>
-  <linearGradient id="beam" x1="0" y1="0" x2="1" y2="1">
-    <stop stop-color="#f2d6a1" stop-opacity=".6"/>
-    <stop offset="1" stop-color="#f2d6a1" stop-opacity="0"/>
-  </linearGradient>
-</defs>
-<rect width="1200" height="760" fill="url(#bg)"/>
-<circle cx="890" cy="210" r="250" fill="url(#sun)"/>
-<g opacity=".3" fill="none" stroke="#9ccaff">
-  <circle cx="890" cy="210" r="160"/>
-  <circle cx="890" cy="210" r="215"/>
-  <circle cx="890" cy="210" r="280"/>
-</g>
-<path d="M0 760 430 235 1200 760Z" fill="url(#beam)" opacity=".48"/>
-<path d="M0 650 360 390 520 520 740 290 1200 650V760H0Z" fill="#08152b" opacity=".65"/>
-<g stroke="#c9d8eb" stroke-opacity=".22" fill="none">
-  <path d="M0 620H1200M0 680H1200M0 720H1200"/>
-  <path d="M120 760 460 240M280 760 550 260M1020 760 910 300M1140 760 950 300"/>
-</g>
-<rect x="70" y="70" width="1060" height="620" rx="26" fill="none" stroke="#e8c891" stroke-opacity=".48"/>
-<text x="112" y="148" fill="#e8c891" font-family="Arial,sans-serif" font-size="20" letter-spacing="7">POPEN</text>
-<text x="112" y="540" fill="#fffaf0" font-family="Georgia,serif" font-size="72">Story</text>
-<text x="118" y="592" fill="#c7d5e7" font-family="Arial,sans-serif" font-size="22" letter-spacing="3">LITTLE JOURNEYS. LASTING MEMORIES.</text>
-<circle cx="1085" cy="625" r="12" fill="#e8c891"/>
-</svg>`;
-
-    const fallback = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
-
     scope.querySelectorAll("img[data-cover-fallback]").forEach((image) => {
       if (image.dataset.coverFallbackBound === "true") return;
       image.dataset.coverFallbackBound = "true";
 
-      image.addEventListener("error", () => {
-        if (image.dataset.coverFallbackApplied === "true") return;
-        image.dataset.coverFallbackApplied = "true";
-        image.src = fallback;
-      });
+      const original = image.getAttribute("src");
+      if (!original) return;
 
-      // Image may already have failed before this script ran
-      if (image.complete && image.naturalWidth === 0 && image.getAttribute("src")) {
-        image.dispatchEvent(new Event("error"));
+      let retries = 0;
+      let retryTimer = 0;
+      let stallTimer = 0;
+
+      const isLoaded = () => image.complete && image.naturalWidth > 0;
+      const isBroken = () => image.complete && image.naturalWidth === 0;
+
+      function armStallTimer() {
+        clearTimeout(stallTimer);
+        stallTimer = setTimeout(() => {
+          if (!isLoaded()) retry();
+        }, COVER_STALL_MS);
       }
+
+      function retry() {
+        clearTimeout(retryTimer);
+        clearTimeout(stallTimer);
+        if (retries >= COVER_MAX_RETRIES) {
+          image.classList.add("cover-failed");
+          return;
+        }
+        retries += 1;
+        retryTimer = setTimeout(() => {
+          image.classList.remove("cover-failed");
+          // A changing query string forces a fresh request instead of reusing a failed/cached one.
+          image.src = original + (original.includes("?") ? "&" : "?") + "r=" + Date.now();
+          armStallTimer();
+        }, 1200 * retries);
+      }
+
+      image.addEventListener("load", () => {
+        clearTimeout(retryTimer);
+        clearTimeout(stallTimer);
+        image.classList.remove("cover-failed");
+      });
+      image.addEventListener("error", retry);
+
+      // Try again from scratch when the network returns or the page comes back from the back/forward cache.
+      function recover() {
+        if (isLoaded()) return;
+        if (image.classList.contains("cover-failed") || isBroken()) {
+          retries = 0;
+          retry();
+        }
+      }
+      window.addEventListener("online", recover);
+      window.addEventListener("pageshow", (event) => { if (event.persisted) recover(); });
+      document.addEventListener("visibilitychange", () => { if (!document.hidden) recover(); });
+
+      if (isBroken()) retry(); // it failed before this script ran
+      else if (!image.complete) armStallTimer();
     });
   }
 
@@ -490,18 +456,33 @@
     return "";
   }
 
+  // Native `required` / `minlength` accept spaces; judge text fields by their trimmed length instead.
+  function applyTrimRule(field) {
+    field.setCustomValidity("");
+    if (field.type === "email") return;
+    const length = field.value.trim().length;
+    if (field.required && length === 0) {
+      field.setCustomValidity(t("v-required"));
+    } else if (field.minLength > 0 && length < field.minLength) {
+      field.setCustomValidity(t("v-short").replace("{n}", String(field.minLength)));
+    }
+  }
+
   function setupContactForm() {
     const form = document.getElementById("contact-form");
     const status = document.getElementById("contact-form-status");
     if (!form || !status) return;
 
-    form.querySelectorAll("input, textarea").forEach((field) => {
+    const fields = Array.from(form.querySelectorAll("input, textarea"));
+
+    fields.forEach((field) => {
       field.addEventListener("invalid", () => {
-        field.setCustomValidity("");
+        // Localise the browser's own message, but never overwrite one we set ourselves.
+        if (field.validity.customError) return;
         const message = validationMessage(field);
         if (message) field.setCustomValidity(message);
       });
-      field.addEventListener("input", () => field.setCustomValidity(""));
+      field.addEventListener("input", () => applyTrimRule(field));
     });
 
     let sending = false;
@@ -511,6 +492,7 @@
       if (sending) return;
 
       setFormStatus(null);
+      fields.forEach(applyTrimRule);
       if (!form.reportValidity()) return;
 
       const action = form.getAttribute("action") || "";
@@ -518,21 +500,18 @@
       const formId = match ? match[1] : "";
 
       if (!formId || /^(?:yourformid|replace|formid)$/i.test(formId)) {
+        // Developer detail stays in the console; visitors get a plain message.
+        console.error("POpen: set a real Formspree form ID in the <form action> attribute in index.html.");
         setFormStatus("form-config-error", "error");
         return;
       }
 
       const submitButton = form.querySelector('button[type="submit"]');
-      const label = submitButton ? submitButton.querySelector("span") : null;
 
       sending = true;
       if (submitButton) {
         submitButton.disabled = true;
         submitButton.setAttribute("aria-busy", "true");
-      }
-      if (label) {
-        label.removeAttribute("data-i18n");
-        label.textContent = t("form-sending");
       }
       setFormStatus("form-sending");
 
@@ -554,10 +533,7 @@
           /* Some error responses may not be JSON. */
         }
 
-        if (
-          response.ok &&
-          (!payload || !Array.isArray(payload.errors) || payload.errors.length === 0)
-        ) {
+        if (response.ok && (!payload || !Array.isArray(payload.errors) || payload.errors.length === 0)) {
           setFormStatus("form-success", "success");
           form.reset();
         } else {
@@ -572,10 +548,6 @@
           submitButton.disabled = false;
           submitButton.removeAttribute("aria-busy");
         }
-        if (label) {
-          label.setAttribute("data-i18n", "send-message");
-          label.textContent = t("send-message");
-        }
       }
     });
   }
@@ -586,9 +558,9 @@
     setupMobileMenu();
     refreshReveal(document);
     setupScrollSpy();
+    setupHeroMotion();
     setupContactForm();
     setupCoverFallbacks(document);
-    syncCoverAlts(document);
 
     document.querySelectorAll("#copyright-year").forEach((element) => {
       element.textContent = String(new Date().getFullYear());
