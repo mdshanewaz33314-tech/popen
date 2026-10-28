@@ -6,49 +6,60 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark">
   <meta name="theme-color" content="#040b19">
-  <title>POpen — A Personal Storytelling Space</title>
-  <meta name="description" content="POpen — a personal space for stories, memories, thoughts and little adventures.">
+  <title data-en="POpen — A Personal Storytelling Space" data-bn="POpen — ব্যক্তিগত গল্পের জায়গা">POpen — A Personal Storytelling Space</title>
+  <meta name="description" content="POpen — a personal space for stories, memories, thoughts and little adventures." data-en="POpen — a personal space for stories, memories, thoughts and little adventures." data-bn="POpen — গল্প, স্মৃতি, ভাবনা আর ছোট ছোট অভিযানের একটি ব্যক্তিগত জায়গা।">
+  <link rel="canonical" href="https://mdshanewaz33314-tech.github.io/popen/">
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="POpen">
   <meta property="og:title" content="POpen — A Personal Storytelling Space">
   <meta property="og:description" content="Stories, memories and little adventures, collected in one place.">
   <meta property="og:url" content="https://mdshanewaz33314-tech.github.io/popen/">
   <meta property="og:image" content="https://mdshanewaz33314-tech.github.io/popen/story-1-cover.jpg">
   <meta property="og:image:width" content="1536">
   <meta property="og:image:height" content="857">
+  <meta property="og:image:alt" content="A Day's Tale — story cover from POpen">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="POpen — A Personal Storytelling Space">
+  <meta name="twitter:description" content="Stories, memories and little adventures, collected in one place.">
+  <meta name="twitter:image" content="https://mdshanewaz33314-tech.github.io/popen/story-1-cover.jpg">
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@500;600;700&family=Playfair+Display:wght@500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@500;600;700&family=Playfair+Display:wght@500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
-  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./style.css?v=3">
   <script>
     (() => {
+      document.documentElement.classList.add('js');
+      // Safety net: if script.js never starts, stop hiding scroll-reveal content after 3s.
+      setTimeout(() => {
+        if (!document.body || !document.body.classList.contains('page-ready')) document.documentElement.classList.add('reveal-timeout');
+      }, 3000);
       try {
         const language = localStorage.getItem('popen_language');
         if (language === 'bn' || language === 'en') document.documentElement.lang = language;
       } catch (_) { /* Storage is optional; the default language remains usable. */ }
     })();
   </script>
-  <script src="./script.js" defer></script>
-  <script src="./stories.js" defer></script>
+  <script src="./script.js?v=3" defer></script>
+  <script src="./stories.js?v=3" defer></script>
 </head>
 <body>
   <!-- SECTION 02: ACCESSIBILITY -->
-  <a class="skip-link" href="#main-content" data-i18n="skip-link">Skip to content</a>
+  <a class="skip-link" href="#main-content"><span class="lang-en">Skip to content</span><span class="lang-bn">মূল কনটেন্টে যান</span></a>
 
   <!-- SECTION 03: SHARED NAVIGATION -->
   <header class="site-header">
-    <nav class="navbar container" aria-label="Main navigation" data-i18n-aria="main-nav-label">
+    <nav class="navbar container" aria-label="Main navigation">
       <a href="./index.html#home" class="logo" aria-label="POpen home"><span class="logo-mark" aria-hidden="true">P</span><span>PO<span class="logo-accent">P</span>EN</span></a>
       <div class="nav-links" id="nav-links">
-        <a href="#home" class="nav-item active" data-i18n="nav-home">Home</a>
-        <a href="#about" class="nav-item" data-i18n="nav-about">About</a>
-        <a href="#stories" class="nav-item" data-i18n="nav-stories">Stories</a>
-        <a href="#contact" class="nav-item" data-i18n="nav-contact">Contact</a>
+        <a href="#home" class="nav-item active"><span class="lang-en">Home</span><span class="lang-bn">হোম</span></a>
+        <a href="#about" class="nav-item"><span class="lang-en">About</span><span class="lang-bn">সম্পর্কে</span></a>
+        <a href="#stories" class="nav-item"><span class="lang-en">Stories</span><span class="lang-bn">গল্প</span></a>
+        <a href="#contact" class="nav-item"><span class="lang-en">Contact</span><span class="lang-bn">যোগাযোগ</span></a>
       </div>
       <div class="nav-controls">
-        <button id="lang-toggle" class="control-btn language-btn" type="button" aria-label="Switch to Bengali" title="বাংলা"><span id="language-label">বাংলা</span></button>
+        <button id="lang-toggle" class="control-btn language-btn" type="button" aria-label="বাংলা — Switch to Bengali" title="বাংলা"><span class="lang-en">বাংলা</span><span class="lang-bn">EN</span></button>
         <button id="menu-toggle" class="hamburger" type="button" aria-controls="nav-links" aria-expanded="false" aria-label="Open menu"><span></span><span></span><span></span></button>
       </div>
     </nav>
@@ -56,7 +67,7 @@
   <div class="mobile-overlay" id="mobile-overlay" aria-hidden="true" hidden></div>
 
   <!-- SECTION 04: HOME PAGE CONTENT -->
-  <main id="main-content">
+  <main id="main-content" tabindex="-1">
     <!-- SECTION 04A: HERO & WELCOME TEXT ANIMATION -->
     <section class="hero" id="home" aria-labelledby="hero-title">
       <div class="hero-pattern" aria-hidden="true"></div>
@@ -65,12 +76,12 @@
       <div class="hero-ring hero-ring-one" aria-hidden="true"></div>
       <div class="hero-ring hero-ring-two" aria-hidden="true"></div>
       <div class="hero-content container">
-        <p class="hero-label"><span class="label-dash" aria-hidden="true"></span><span data-i18n="hero-kicker">STORIES · MEMORIES · LITTLE ADVENTURES</span></p>
-        <h1 id="hero-title" class="hero-title" data-i18n="hero-title"><span class="hero-welcome-part">Welcome to</span> <span class="hero-name-part">POpen</span></h1>
-        <p class="hero-subtitle" data-i18n="hero-subtitle">A place for stories, memories and little moments.</p>
+        <p class="hero-label"><span class="label-dash" aria-hidden="true"></span><span class="lang-en">STORIES · MEMORIES · LITTLE ADVENTURES</span><span class="lang-bn">গল্প · স্মৃতি · ছোট ছোট অভিযান</span></p>
+        <h1 id="hero-title" class="hero-title"><span class="lang-en"><span class="hero-welcome-part">Welcome to</span> <span class="hero-name-part">POpen</span></span><span class="lang-bn"><span class="hero-welcome-part">POpen-এ</span> <span class="hero-name-part">স্বাগতম</span></span></h1>
+        <p class="hero-subtitle"><span class="lang-en">A place for stories, memories and little moments.</span><span class="lang-bn">গল্প, স্মৃতি এবং ছোট ছোট মুহূর্তের একটি জায়গা।</span></p>
         <div class="hero-buttons">
-          <a href="./stories.html" class="btn primary-btn"><span data-i18n="hero-btn">Explore Stories</span><span class="btn-arrow" aria-hidden="true">↗</span></a>
-          <a href="#about" class="btn secondary-btn"><span data-i18n="hero-about-btn">Discover POpen</span><span class="btn-arrow" aria-hidden="true">→</span></a>
+          <a href="./stories.html" class="btn primary-btn"><span class="lang-en">Explore Stories</span><span class="lang-bn">গল্পগুলো দেখুন</span><span class="btn-arrow" aria-hidden="true">↗</span></a>
+          <a href="#about" class="btn secondary-btn"><span class="lang-en">Discover POpen</span><span class="lang-bn">POpen সম্পর্কে জানুন</span><span class="btn-arrow" aria-hidden="true">→</span></a>
         </div>
         <div class="hero-signature" aria-hidden="true"><span></span><span>POpen</span></div>
       </div>
@@ -82,16 +93,16 @@
       <div class="container">
         <div class="section-heading reveal">
           <div>
-            <p class="section-kicker" data-i18n="stories-kicker">THE STORY ARCHIVE</p>
+            <p class="section-kicker"><span class="lang-en">THE STORY ARCHIVE</span><span class="lang-bn">গল্পের সংগ্রহ</span></p>
             <h2 id="stories-title" class="section-title"><span class="lang-en">Recommended</span> <em class="lang-en">reads.</em><span class="lang-bn">কিছু পড়ার</span> <em class="lang-bn">মতো গল্প।</em></h2>
           </div>
-          <a class="text-link desktop-view-all" href="./stories.html"><span data-i18n="view-all-stories">View all stories</span><span aria-hidden="true">↗</span></a>
+          <a class="text-link desktop-view-all" href="./stories.html"><span class="lang-en">View all stories</span><span class="lang-bn">সব গল্প দেখুন</span><span aria-hidden="true">↗</span></a>
         </div>
         <div id="latest-stories-grid" class="stories-grid reveal">
           <a href="./story-1.html" class="story-card glass-card">
-            <div class="story-card-media"><img src="./story-1-cover.jpg" alt="A Day's Tale cover illustration" class="story-card-img" data-cover-fallback loading="lazy" decoding="async"></div>
+            <div class="story-card-media"><img src="./story-1-cover.jpg" alt="A Day's Tale cover illustration" data-alt-en="A Day's Tale cover illustration" data-alt-bn="এক দিনের কথা গল্পের কভার ছবি" class="story-card-img" width="1536" height="857" data-cover-fallback decoding="async"></div>
             <div class="story-card-content">
-              <p class="story-date"><span class="lang-en">August 1, 2026</span><span class="lang-bn">১ আগস্ট, ২০২৬</span></p>
+              <p class="story-date"><time datetime="2026-08-01"><span class="lang-en">August 1, 2026</span><span class="lang-bn">১ আগস্ট, ২০২৬</span></time></p>
               <h3 class="lang-en">A Day's Tale</h3><h3 class="lang-bn">এক দিনের কথা</h3>
               <p class="lang-en story-description">A spontaneous post-exam trip turns into an unforgettable adventure.</p>
               <p class="lang-bn story-description">পরীক্ষার পরের একটি ঘোরাঘুরি হয়ে ওঠে অবিস্মরণীয় এক অভিযান।</p>
@@ -100,7 +111,7 @@
             </div>
           </a>
         </div>
-        <div class="stories-more-wrap mobile-view-all"><a class="btn secondary-btn" href="./stories.html" data-i18n="view-all-stories">View all stories</a></div>
+        <div class="stories-more-wrap mobile-view-all"><a class="btn secondary-btn" href="./stories.html"><span class="lang-en">View all stories</span><span class="lang-bn">সব গল্প দেখুন</span></a></div>
       </div>
     </section>
 
@@ -108,7 +119,7 @@
     <section id="about" class="section-padding about-section" aria-labelledby="about-title">
       <div class="container">
         <div class="section-heading reveal">
-          <div><p class="section-kicker" data-i18n="about-kicker">A LITTLE ABOUT THIS PLACE</p><h2 id="about-title" class="section-title" data-i18n="about-title">About POpen</h2></div>
+          <div><p class="section-kicker"><span class="lang-en">A LITTLE ABOUT THIS PLACE</span><span class="lang-bn">এই জায়গা সম্পর্কে</span></p><h2 id="about-title" class="section-title"><span class="lang-en">About POpen</span><span class="lang-bn">POpen সম্পর্কে</span></h2></div>
           <span class="section-number" aria-hidden="true">02</span>
         </div>
         <div class="glass-card about-card reveal">
@@ -127,21 +138,21 @@
     <section id="contact" class="section-padding contact-section" aria-labelledby="contact-title">
       <div class="container">
         <div class="section-heading reveal">
-          <div><p class="section-kicker" data-i18n="contact-kicker">LET'S CONNECT</p><h2 id="contact-title" class="section-title" data-i18n="contact-title">Get in touch</h2></div>
+          <div><p class="section-kicker"><span class="lang-en">LET'S CONNECT</span><span class="lang-bn">যোগাযোগ করা যাক</span></p><h2 id="contact-title" class="section-title"><span class="lang-en">Get in touch</span><span class="lang-bn">যোগাযোগ করুন</span></h2></div>
           <span class="section-number" aria-hidden="true">03</span>
         </div>
         <div class="contact-wrapper">
           <form action="https://formspree.io/f/mdeaqljl" method="POST" class="contact-form glass-card reveal" id="contact-form">
             <p class="form-intro lang-en">Have a thought, a story, or just want to say hello?</p>
-            <p class="form-intro lang-bn">কোনো ভাবনা বা গল্প বলতে চেলে-</p>
-            <div class="form-group"><label for="contact-name" data-i18n="name-label">Name</label><input id="contact-name" type="text" name="name" autocomplete="name" placeholder="Your name" data-i18n-placeholder="name-placeholder" required minlength="2" maxlength="100" class="form-input"></div>
-            <div class="form-group"><label for="contact-email" data-i18n="email-label">Your email</label><input id="contact-email" type="email" name="email" autocomplete="email" placeholder="Your email" data-i18n-placeholder="email-placeholder" required maxlength="254" class="form-input"></div>
-            <div class="form-group"><label for="contact-message" data-i18n="message-label">Your message</label><textarea id="contact-message" name="message" rows="4" placeholder="Write your message" data-i18n-placeholder="message-placeholder" required minlength="5" maxlength="5000" class="form-input form-textarea"></textarea></div>
+            <p class="form-intro lang-bn">কোনো ভাবনা, গল্প বলতে চান?</p>
+            <div class="form-group"><label for="contact-name"><span class="lang-en">Name</span><span class="lang-bn">নাম</span></label><input id="contact-name" type="text" name="name" autocomplete="name" placeholder="Your name" data-i18n-placeholder="name-placeholder" required minlength="2" maxlength="100" class="form-input"></div>
+            <div class="form-group"><label for="contact-email"><span class="lang-en">Your email</span><span class="lang-bn">আপনার ইমেইল</span></label><input id="contact-email" type="email" name="email" autocomplete="email" placeholder="Your email" data-i18n-placeholder="email-placeholder" required maxlength="254" class="form-input"></div>
+            <div class="form-group"><label for="contact-message"><span class="lang-en">Your message</span><span class="lang-bn">আপনার বার্তা</span></label><textarea id="contact-message" name="message" rows="4" placeholder="Write your message" data-i18n-placeholder="message-placeholder" required minlength="5" maxlength="5000" class="form-input form-textarea"></textarea></div>
             <div class="hp-field" aria-hidden="true"><input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></div>
-            <button type="submit" class="btn primary-btn submit-btn"><span data-i18n="send-message">Send message</span><span aria-hidden="true">↗</span></button>
+            <button type="submit" class="btn primary-btn submit-btn"><span class="lang-en">Send message</span><span class="lang-bn">বার্তা পাঠান</span><span aria-hidden="true">↗</span></button>
             <p class="form-status" id="contact-form-status" role="status" aria-live="polite"></p>
           </form>
-          <div class="direct-connect-title reveal"><p data-i18n="or-connect">Or connect directly</p><span class="direct-connect-rule" aria-hidden="true"></span></div>
+          <div class="direct-connect-title reveal"><p><span class="lang-en">Or connect directly</span><span class="lang-bn">অথবা সরাসরি যোগাযোগ করুন</span></p><span class="direct-connect-rule" aria-hidden="true"></span></div>
           <div class="social-pills-grid reveal">
             <a href="https://www.facebook.com/profile.php?id=61595384415685" target="_blank" rel="noopener noreferrer" class="social-pill glass-card pill-facebook"><span class="social-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M13.5 21v-8h2.7l.4-3h-3.1V8.1c0-.9.3-1.5 1.6-1.5h1.7V3.9c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3V10H7.3v3h2.8v8h3.4z"/></svg></span><span>Facebook</span><span class="social-arrow" aria-hidden="true">↗</span></a>
             <a href="https://www.facebook.com/profile.php?id=61594373012323" target="_blank" rel="noopener noreferrer" class="social-pill glass-card pill-voss"><span class="social-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M13.5 21v-8h2.7l.4-3h-3.1V8.1c0-.9.3-1.5 1.6-1.5h1.7V3.9c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3V10H7.3v3h2.8v8h3.4z"/></svg></span><span>VOSS</span><span class="social-arrow" aria-hidden="true">↗</span></a>
