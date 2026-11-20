@@ -232,6 +232,7 @@ html[lang="bn"] .story-header h1 { font-family: "Noto Serif Bengali", "Hind Sili
 .story-header .story-date { margin-bottom: 0; }
 .story-content { min-width: 0; width: min(100%, 880px); margin: 0 auto; padding: clamp(24px, 5vw, 58px); border-radius: var(--radius); }
 .story-content p { margin: 0 0 1.25em; color: var(--text); font-size: 15px; line-height: 2.05; }
+.story-content .story-divider { margin: 1.8em 0; color: var(--gold); text-align: left; letter-spacing: .6em; }
 .story-content p:last-child { margin-bottom: 0; }
 html[lang="bn"] .story-content p { font-family: "Hind Siliguri", sans-serif; font-size: 16px; line-height: 2.1; }
 .empty-state { margin-top: 30px; padding: 28px; border: 1px dashed var(--border); border-radius: var(--radius); color: var(--muted); text-align: center; }
