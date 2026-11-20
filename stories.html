@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="en" data-theme="dark">
 <head>
-  <!-- SECTION 01: DOCUMENT METADATA, FONTS & STYLES -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark">
@@ -14,10 +13,8 @@
   <meta property="og:title" content="Stories — POpen">
   <meta property="og:description" content="Explore stories and little adventures published on POpen.">
   <meta property="og:url" content="https://mdshanewaz33314-tech.github.io/popen/stories.html">
-  <meta property="og:image" content="https://mdshanewaz33314-tech.github.io/popen/story-1-cover.jpg">
-  <meta property="og:image:width" content="1536">
-  <meta property="og:image:height" content="857">
-  <meta property="og:image:alt" content="A Day's Tale — story cover from POpen">
+  <meta property="og:image" content="https://mdshanewaz33314-tech.github.io/popen/story-2-cover.png">
+  <meta property="og:image:alt" content="The Battle of Three Pawns — story cover from POpen">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,7 +25,6 @@
   <script>
     (() => {
       document.documentElement.classList.add('js');
-      // Safety net: if script.js never starts, stop hiding scroll-reveal content after 3s.
       setTimeout(() => {
         if (!document.body || !document.body.classList.contains('page-ready')) document.documentElement.classList.add('reveal-timeout');
       }, 3000);
@@ -39,7 +35,7 @@
     })();
   </script>
   <script src="./script.js?v=3" defer></script>
-  <script src="./stories.js?v=3" defer></script>
+  <script src="./stories.js?v=4" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content"><span class="lang-en">Skip to content</span><span class="lang-bn">মূল কনটেন্টে যান</span></a>
@@ -61,11 +57,33 @@
   <div class="mobile-overlay" id="mobile-overlay" aria-hidden="true" hidden></div>
   <main id="main-content" class="stories-page section-padding" tabindex="-1">
     <div class="container">
-      <header class="page-heading enter"><h1 class="section-title lang-en">All stories<span class="title-period">.</span></h1><h1 class="section-title lang-bn">সব গল্প<span class="title-period">।</span></h1><p class="page-description lang-en">Little moments, kept as stories.</p><p class="page-description lang-bn">ছোট ছোট মুহূর্ত—গল্প হয়ে থেকে যাক।</p></header>
+      <header class="page-heading enter">
+        <h1 class="section-title lang-en">All stories<span class="title-period">.</span></h1>
+        <h1 class="section-title lang-bn">সব গল্প<span class="title-period">।</span></h1>
+        <p class="page-description lang-en">Little moments, kept as stories.</p>
+        <p class="page-description lang-bn">ছোট ছোট মুহূর্ত—গল্প হয়ে থেকে যাক।</p>
+      </header>
       <div id="all-stories-grid" class="stories-grid enter">
-        <a href="./story-1.html" class="story-card glass-card"><div class="story-card-media"><img src="./story-1-cover.jpg" alt="A Day's Tale cover illustration" data-alt-en="A Day's Tale cover illustration" data-alt-bn="এক দিনের কথা গল্পের কভার ছবি" class="story-card-img" width="1536" height="857" data-cover-fallback decoding="async"></div><div class="story-card-content">
-          <p class="story-date"><time datetime="2026-08-01"><span class="lang-en">August 1, 2026</span><span class="lang-bn">১ আগস্ট, ২০২৬</span></time></p>
-          <h2 class="lang-en">A Day's Tale</h2><h2 class="lang-bn">এক দিনের কথা</h2><p class="lang-en story-description">A spontaneous post-exam trip turns into an unforgettable adventure filled with metro rides, a swimming pool, and a struggle for 500 Taka change.</p><p class="lang-bn story-description">পরীক্ষা শেষের এক স্বতঃস্ফূর্ত ঘোরাঘুরি কীভাবে মেট্রো ভ্রমণ, সুইমিং পুল আর ৫০০ টাকার ভাঙতি খোঁজার এক অবিস্মরণীয় রোমাঞ্চে পরিণত হলো।</p><span class="read-more lang-en">Read story <span aria-hidden="true">→</span></span><span class="read-more lang-bn">গল্পটি পড়ুন <span aria-hidden="true">→</span></span></div></a>
+        <a href="./story-2.html" class="story-card glass-card" data-story-id="story-2">
+          <div class="story-card-media"><img src="./story-2-cover.png" alt="তিন বোড়ের যুদ্ধ গল্পের প্রচ্ছদ" data-alt-en="The Battle of Three Pawns cover illustration" data-alt-bn="তিন বোড়ের যুদ্ধ গল্পের প্রচ্ছদ" class="story-card-img" width="1536" height="857" loading="lazy" decoding="async" data-cover-fallback></div>
+          <div class="story-card-content">
+            <p class="story-date"><time datetime="2026-11-20"><span class="lang-en">November 20, 2026</span><span class="lang-bn">২০ নভেম্বর, ২০২৬</span></time></p>
+            <h2 class="lang-en">The Battle of Three Pawns</h2><h2 class="lang-bn">তিন বোড়ের যুদ্ধ</h2>
+            <p class="lang-en story-description">Three students, one chess competition, and a two-day battle full of unexpected turns, improvised leadership, and narrow misses.</p>
+            <p class="lang-bn story-description">তিনজনের অসম্পূর্ণ দল নিয়ে দাবা প্রতিযোগিতায় দুই দিনের লড়াই—অপ্রত্যাশিত ঘটনা, বিচিত্র নেতৃত্ব আর অল্পের জন্য স্বপ্নভঙ্গের গল্প।</p>
+            <span class="read-more lang-en">Read story <span aria-hidden="true">→</span></span><span class="read-more lang-bn">গল্পটি পড়ুন <span aria-hidden="true">→</span></span>
+          </div>
+        </a>
+        <a href="./story-1.html" class="story-card glass-card" data-story-id="story-1">
+          <div class="story-card-media"><img src="./story-1-cover.jpg" alt="এক দিনের কথা গল্পের কভার ছবি" data-alt-en="A Day's Tale cover illustration" data-alt-bn="এক দিনের কথা গল্পের কভার ছবি" class="story-card-img" width="1536" height="857" loading="lazy" decoding="async" data-cover-fallback></div>
+          <div class="story-card-content">
+            <p class="story-date"><time datetime="2026-08-01"><span class="lang-en">August 1, 2026</span><span class="lang-bn">১ আগস্ট, ২০২৬</span></time></p>
+            <h2 class="lang-en">A Day's Tale</h2><h2 class="lang-bn">এক দিনের কথা</h2>
+            <p class="lang-en story-description">A spontaneous post-exam trip turns into an unforgettable adventure filled with metro rides, a swimming pool, and a struggle for 500 Taka change.</p>
+            <p class="lang-bn story-description">পরীক্ষা শেষের এক স্বতঃস্ফূর্ত ঘোরাঘুরি কীভাবে মেট্রো ভ্রমণ, সুইমিং পুল আর ৫০০ টাকার ভাঙতি খোঁজার এক অবিস্মরণীয় রোমাঞ্চে পরিণত হলো।</p>
+            <span class="read-more lang-en">Read story <span aria-hidden="true">→</span></span><span class="read-more lang-bn">গল্পটি পড়ুন <span aria-hidden="true">→</span></span>
+          </div>
+        </a>
       </div>
       <div id="stories-empty" class="empty-state" hidden><p class="lang-en">No stories have been published yet.</p><p class="lang-bn">এখনো কোনো গল্প প্রকাশিত হয়নি।</p></div>
     </div>
