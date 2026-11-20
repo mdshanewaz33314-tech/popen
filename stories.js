@@ -3,6 +3,20 @@
 (() => {
   const storyList = [
     {
+      id: "story-2",
+      titleEn: "The Battle of Three Pawns",
+      titleBn: "তিন বোড়ের যুদ্ধ",
+      descriptionEn: "Three students, one chess competition, and a two-day battle full of unexpected turns, improvised leadership, and narrow misses.",
+      descriptionBn: "তিনজনের অসম্পূর্ণ দল নিয়ে দাবা প্রতিযোগিতায় দুই দিনের লড়াই—অপ্রত্যাশিত ঘটনা, বিচিত্র নেতৃত্ব আর অল্পের জন্য স্বপ্নভঙ্গের গল্প।",
+      dateEn: "November 20, 2026",
+      dateBn: "২০ নভেম্বর, ২০২৬",
+      dateISO: "2026-11-20",
+      coverImage: "./story-2-cover.png",
+      storyFile: "./story-2.html",
+      altEn: "The Battle of Three Pawns cover illustration",
+      altBn: "তিন বোড়ের যুদ্ধ গল্পের প্রচ্ছদ"
+    },
+    {
       id: "story-1",
       titleEn: "A Day's Tale",
       titleBn: "এক দিনের কথা",
@@ -10,7 +24,6 @@
       descriptionBn: "পরীক্ষা শেষের এক স্বতঃস্ফূর্ত ঘোরাঘুরি কীভাবে মেট্রো ভ্রমণ, সুইমিং পুল আর ৫০০ টাকার ভাঙতি খোঁজার এক অবিস্মরণীয় রোমাঞ্চে পরিণত হলো।",
       dateEn: "August 1, 2026",
       dateBn: "১ আগস্ট, ২০২৬",
-      // ISO date for reliable sorting (newest first)
       dateISO: "2026-08-01",
       coverImage: "./story-1-cover.jpg",
       storyFile: "./story-1.html",
@@ -19,8 +32,7 @@
     }
   ];
 
-  // Newest stories first
-  storyList.sort((a, b) => (b.dateISO || "").localeCompare(a.dateISO || ""));
+  storyList.sort((a, b) => b.dateISO.localeCompare(a.dateISO));
 
   const escapeHTML = (value) => String(value == null ? "" : value)
     .replace(/&/g, "&amp;")
@@ -35,24 +47,10 @@
 
     return `<a href="${escapeHTML(story.storyFile)}" class="story-card glass-card" data-story-id="${escapeHTML(story.id)}">
       <div class="story-card-media">
-        <img
-          src="${escapeHTML(story.coverImage)}"
-          alt="${altEn}"
-          class="story-card-img"
-          data-cover-fallback
-          data-alt-en="${altEn}"
-          data-alt-bn="${altBn}"
-          loading="lazy"
-          decoding="async"
-          width="1536"
-          height="857"
-        >
+        <img src="${escapeHTML(story.coverImage)}" alt="${altEn}" class="story-card-img" data-cover-fallback data-alt-en="${altEn}" data-alt-bn="${altBn}" loading="lazy" decoding="async" width="1536" height="857">
       </div>
       <div class="story-card-content">
-        <p class="story-date">
-          <span class="lang-en">${escapeHTML(story.dateEn)}</span>
-          <span class="lang-bn">${escapeHTML(story.dateBn)}</span>
-        </p>
+        <p class="story-date"><time datetime="${escapeHTML(story.dateISO)}"><span class="lang-en">${escapeHTML(story.dateEn)}</span><span class="lang-bn">${escapeHTML(story.dateBn)}</span></time></p>
         <${headingTag} class="lang-en">${escapeHTML(story.titleEn)}</${headingTag}>
         <${headingTag} class="lang-bn">${escapeHTML(story.titleBn)}</${headingTag}>
         <p class="lang-en story-description">${escapeHTML(story.descriptionEn)}</p>
@@ -85,16 +83,9 @@
     if (empty) empty.hidden = storyList.length > 0;
 
     if (window.POPEN) {
-      if (typeof window.POPEN.refreshReveal === "function") {
-        window.POPEN.refreshReveal(document);
-      }
-      if (typeof window.POPEN.refreshCoverFallbacks === "function") {
-        window.POPEN.refreshCoverFallbacks(document);
-      }
-      // Keep image alt text in sync with current language
-      if (typeof window.POPEN.syncCoverAlts === "function") {
-        window.POPEN.syncCoverAlts(document);
-      }
+      if (typeof window.POPEN.refreshReveal === "function") window.POPEN.refreshReveal(document);
+      if (typeof window.POPEN.refreshCoverFallbacks === "function") window.POPEN.refreshCoverFallbacks(document);
+      if (typeof window.POPEN.syncCoverAlts === "function") window.POPEN.syncCoverAlts(document);
     }
   }
 
